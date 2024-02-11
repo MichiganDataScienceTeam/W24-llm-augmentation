@@ -1,0 +1,6 @@
+openai
+pandas
+regex
+nump
+scipy
+gensim
