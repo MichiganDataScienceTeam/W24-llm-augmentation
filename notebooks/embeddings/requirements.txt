@@ -1,6 +1,6 @@
 openai
 pandas
 regex
-nump
+numpy
 scipy
 gensim
