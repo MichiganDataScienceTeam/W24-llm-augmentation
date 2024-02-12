@@ -28,8 +28,13 @@ source venv/bin/activate
 On Windows:
 
 ```
-.\venv\Scripts\activate
+./venv/Scripts/activate
 ```
+or
+```
+./venv/bin/activate
+```
+(the directory might differ on your system)
 After activation, your shell prompt will change to show the name of the activated virtual environment, indicating that any Python or pip commands you run will operate within the virtual environment.
 
 3. Installing Dependencies
