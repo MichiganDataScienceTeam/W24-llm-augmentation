@@ -4,7 +4,7 @@ Large Language Models boast an incredible breadth of knowledge in just about eve
 
 This repository contains tutorial notebooks aligned with the weekly lessons of the LLM Augmentation project (W24). The notebooks are designed to provide hands-on experience with the technologies and concepts we'll be exploring. 
 
-To get started, simply fork the repository and use the notebooks in your local development environment. If your local environment proves challenging, utilize cloud notebooks like [Google Colab](https://colab.research.google.com/) or [Kaggle](https://www.kaggle.com/).
+To get started, simply clone the repository and use the notebooks in your local development environment. If your local environment proves challenging, utilize cloud notebooks like [Google Colab](https://colab.research.google.com/) or [Kaggle](https://www.kaggle.com/).
 
 ## Project Timeline 
 
