@@ -11,7 +11,7 @@ To get started, simply clone the repository and use the notebooks in your local 
 | Week | Date  | Weekly Topic                                     | Objective             |
 |------|-------|--------------------------------------------------|-----------------------|
 | 1    | 2/11  | Setup, Intro to LLMs, & Embeddings               | -                     |
-| 2    | 2/18  | Vector Databases, Retrieval Augmented Generation (RAG) | -              |
+| 2    | 2/18  | Vector Databases & Retrieval Augmented Generation (RAG) | -              |
 | -    | -     | Spring Break                                     | -                     |
 | 3    | 3/10  | Function Calling & LangChain                     | Form Groups           |
 | 4    | 3/17  | Development Time                                 | -                     |
