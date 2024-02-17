@@ -1,0 +1,9 @@
+openai
+pandas
+regex
+numpy
+scipy
+gensim
+scikit-learn
+matplotlib
+llama-index
