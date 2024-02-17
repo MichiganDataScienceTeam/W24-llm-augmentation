@@ -6,3 +6,4 @@ scipy
 gensim
 scikit-learn
 matplotlib
+llama-index
