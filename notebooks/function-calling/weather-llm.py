@@ -1,3 +1,12 @@
+"""
+A simple example of function calling with OpenAI.
+We use a get_current_weather function to demonstrate the OpenAI API's ability to call external functions that we define.
+It is easy to imagine how much more powerful this could be with real-world APIs, and with a variety of different functions.
+
+Run with: 
+python3 weather-llm.py
+"""
+
 import openai
 from dotenv import load_dotenv
 import os
@@ -6,6 +15,8 @@ load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+# A really naive implementation of a function that gets the current weather
+# In reality, you should be using some weather API to get real-time data
 def get_current_weather(location):
     if location == "Mountain View, CA":
         return "sunny"
@@ -14,6 +25,7 @@ def get_current_weather(location):
     else:
         return "unknown"
 
+# Function to call the OpenAI API and get a response, whether it's a completion or a tool call
 def get_completion(messages, model="gpt-3.5-turbo", temperature=0, max_tokens=300, tools=None):
     response = openai.chat.completions.create(
         model=model,
@@ -25,6 +37,8 @@ def get_completion(messages, model="gpt-3.5-turbo", temperature=0, max_tokens=30
     return response.choices[0].message
 
 if __name__ == "__main__":
+    # Define the tools that we want to use
+    # This is defined in JSON format for the OpenAI API
     tools = [
         {
             "type": "function",
@@ -45,18 +59,21 @@ if __name__ == "__main__":
         }
     ]
 
+    # Pre-load a message to begin the conversation
+    msg = "What is the weather like in Seattle?"
     messages = [
         {
             "role": "user",
-            "content": "What is the weather like in Seattle?"
+            "content": msg
         }
     ]
-    
-    print("User: What is the weather like in Seattle?")
+    print(f"User: {msg}")
+
 
     response = get_completion(messages, tools=tools)
-
     # Parse the response function call
+    # Uncomment the following line to see the response object
+    # print(response)
     function_name = response.tool_calls[0].function.name
     function_args = eval(response.tool_calls[0].function.arguments)
 
