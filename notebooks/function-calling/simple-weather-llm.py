@@ -3,6 +3,9 @@ A simple example of function calling with OpenAI.
 We use a get_current_weather function to demonstrate the OpenAI API's ability to call external functions that we define.
 It is easy to imagine how much more powerful this could be with real-world APIs, and with a variety of different functions.
 
+Note: This script is simply for learning and demonstration purposes. In practice, you would use a weather API, and you would not 
+hard-code function-calling; libraries like LangChain and LlamaIndex are designed to make this process much easier.
+
 Run with: 
 python3 weather-llm.py
 """
@@ -71,7 +74,11 @@ if __name__ == "__main__":
 
 
     response = get_completion(messages, tools=tools)
-    # Parse the response function call
+
+    # Now, we need to parse the response - the response will contain a TOOL CALL, rather than a completion.
+    # The TOOL CALL tells us the function (and appropriate arguments) that the LLM wants to call.
+    # This works because OpenAI's API LLMs have been fine-tuned to understand and call functions - other LLMs, such as Llama, do not have this capability.
+
     # Uncomment the following line to see the response object
     # print(response)
     function_name = response.tool_calls[0].function.name
