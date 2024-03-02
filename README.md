@@ -26,19 +26,36 @@ API keys are an essential part of the project. Everyone will be provided OpenAI 
 
 To use API keys in your development environment, either set them as System Environment Variables, or create a `.env` file in your local folder, and set your API key environment variables there. Below is an example of a `.env` file, and Python code pulling an API key from the file.
 
+Your `.env` file should look this:
 ```py
 # .env
 OPENAI_API_KEY=your_api_key
+OTHER_API_KEYS=...
+...
 ```
 
+To pull environment variables from the `.env` into your code, you will want to use the `dotenv` Python library, like so.
 ```py
 # main.py
 from dotenv import load_dotenv
 import os
-import openai
 
 load_dotenv()
+```
+
+Once the above cell is ran, all environment variables from the `.env` variable are loaded into your Notebook environment's variables. To pull these environment variables where necessary, utilize `os.getenv("OPENAI_API_KEY")`.
+
+When using `openai`, setting the API key should look like this:
+```
+import openai
+
 openai.api_key = os.getenv("OPENAI_API_KEY")
+```
+
+When using `langchain`, `load_dotenv()` should suffice, as LangChain automatically looks for environment variables with the appropriate name. If not, do the following:
+```
+X_API_KEY = os.getenv("API_KEY_NAME")
+# then, pass the API KEY variable where necessary
 ```
 
 __**Do not**__ hardcode the API keys into your code or include the `.env` file in a Git commit.
