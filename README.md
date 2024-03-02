@@ -36,7 +36,6 @@ OTHER_API_KEYS=...
 
 To pull environment variables from the `.env` into your code, you will want to use the `dotenv` Python library, like so.
 ```py
-# main.py
 from dotenv import load_dotenv
 import os
 
