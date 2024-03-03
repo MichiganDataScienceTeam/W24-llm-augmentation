@@ -3,8 +3,9 @@ A simple example of function calling with OpenAI.
 We use a get_current_weather function to demonstrate the OpenAI API's ability to call external functions that we define.
 It is easy to imagine how much more powerful this could be with a variety of different functions.
 
-Note: This script is simply for learning and demonstration purposes. In practice, you would not hard-code 
-function-calling, as libraries like LangChain and LlamaIndex are designed to make this process much easier.
+Note: This script is simply for learning and demonstration purposes. 
+In practice, you would not "hard-code" LLM conversation as we are. 
+Libraries like LangChain and LlamaIndex are designed to make this process much easier.
 
 Run with: 
 python3 weather-llm.py
@@ -19,8 +20,9 @@ load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# A really naive implementation of a function that gets the current weather
-# In reality, you should be using some weather API to get real-time data
+# A function that gets weather data given a location in a string format (e.g., "Ann Arbor, MI", "Seattle, WA", ...)
+# First, the location is geocoded into a (latitude, longitude) coordinate
+# Then, using the coordinate, real-time weather data is fetched
 def get_current_weather(location: str) -> str:
     # URL for geocoding API (convert location to geo-coordinates)
     location_api_url = "https://nominatim.openstreetmap.org/search"
