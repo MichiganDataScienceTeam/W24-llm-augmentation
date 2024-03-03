@@ -45,9 +45,9 @@ def get_current_weather(location: str) -> str:
             latitude = results[0]['lat']
             longitude = results[0]['lon']
         else:
-            return "Location not found"
+            raise Exception(f"Location {location} not found")
     else:
-        return "Failed to retrieve data"
+        raise Exception("Failed to retrieve data")
 
     # Get the weather API URL for the stations at that location
     weather_station_url = f"https://api.weather.gov/points/{latitude},{longitude}"
