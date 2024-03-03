@@ -45,14 +45,14 @@ load_dotenv()
 Once the above cell is ran, all environment variables from the `.env` variable are loaded into your Notebook environment's variables. To pull these environment variables where necessary, utilize `os.getenv("OPENAI_API_KEY")`.
 
 When using `openai`, setting the API key should look like this:
-```
+```py
 import openai
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 ```
 
 When using `langchain`, `load_dotenv()` should suffice, as LangChain automatically looks for environment variables with the appropriate name. If not, do the following:
-```
+```py
 X_API_KEY = os.getenv("API_KEY_NAME")
 # then, pass the API KEY variable where necessary
 ```
