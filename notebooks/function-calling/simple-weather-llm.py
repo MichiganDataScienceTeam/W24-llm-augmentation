@@ -21,7 +21,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # A really naive implementation of a function that gets the current weather
 # In reality, you should be using some weather API to get real-time data
-def get_current_weather(location):
+def get_current_weather(location: str) -> str:
     # URL for geocoding API (convert location to geo-coordinates)
     location_api_url = "https://nominatim.openstreetmap.org/search"
     
@@ -60,8 +60,22 @@ def get_current_weather(location):
     latest_observation_url = f"https://api.weather.gov/stations/{first_station_id}/observations/latest"
     observation_response = requests.get(latest_observation_url, headers={"User-Agent": "weatherApp"}).json()
 
-    # Return a json string containing all of the oberved weather information
-    return str(observation_response)
+    # Return a string containing all of the oberved weather information
+    # Uncomment the following line to see the returned object
+    # print(str(observation_response))
+
+    # We could just return the entire json object as a string, but that is very unreliable with LLMs (think about tokenization)
+    # A better practice would be to extract data into a more "human" form, and return that
+    return f"""
+    Weather Data for {location}:
+
+    Current Weather: {observation_response['properties']['textDescription']}
+    Current Temperature: {observation_response['properties']['temperature']['value']} degrees celsius
+    Windspeed: {observation_response['properties']['windSpeed']['value']} km per hr
+    Visibility: {observation_response['properties']['visibility']['value']} meters
+    Wind Chill: {observation_response['properties']['windChill']['value']} degrees celsius
+    Relative Humidity: {observation_response['properties']['relativeHumidity']['value']} %
+    """
     
 
 # Function to call the OpenAI API and get a response, whether it's a completion or a tool call
@@ -117,25 +131,39 @@ if __name__ == "__main__":
 
     # Uncomment the following line to see the response object
     # print(response)
-    function_name = response.tool_calls[0].function.name
-    function_args = eval(response.tool_calls[0].function.arguments)
 
-    function_call = function_name + "(\'" + (function_args)["location"] + "\')"
-    print(f"Calling function: {function_call}\n---")
-    tool_response = eval(function_call)
-    #print(f"Function returns: {tool_response}")
+    tool_responses = []
+    # multiple functions can be called at the same time, so we must account for that
+    for tool_call in response.tool_calls:
+        function_name = tool_call.function.name
+        function_args = eval(tool_call.function.arguments)
 
+        function_call = function_name + "(\'" + (function_args)["location"] + "\')"
+        print(f"Calling function: {function_call}")
+        tool_response = eval(function_call)
+        print(f"Function returns: {tool_response}\n---")
+        tool_responses.append({"function_name": function_name, "tool_response": tool_response})
+
+    # Adjust the messages array for next API call
     messages = [
         {
             "role": "user",
             "content": msg
         },
-        {
-            "role": "system",
-            "content": function_call + " -> " + tool_response,
-        }
+        response,
     ]
+
+    for idx, tool_call in enumerate(response.tool_calls):
+        messages.append(
+            {
+                "role": "tool",
+                "tool_call_id": tool_call.id,
+                "name": tool_responses[idx]['function_name'],
+                "content": tool_responses[idx]['tool_response'],
+            }
+        )
+        
 
     response = get_completion(messages, tools=tools)
 
-    print(f"AI:\n{response.content}\n---")
+    print(f"AI: {response.content}\n---")
