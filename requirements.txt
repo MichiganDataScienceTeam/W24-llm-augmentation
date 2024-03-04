@@ -13,4 +13,3 @@ pypdf
 llama-index
 python-dotenv
 numexpr
-pydantic
