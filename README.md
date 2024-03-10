@@ -15,8 +15,8 @@ To get started, simply clone the repository and use the notebooks in your local 
 | -    | -     | Spring Break                                     | -                     |
 | 3    | 3/10  | Function Calling & LangChain                     | Form Groups           |
 | 4    | 3/17  | Development Time                                 | -                     |
-| 5    | 3/24  | Development Time                                 | Group Checkpoint Due  |
-| 6    | 3/31  | Building front-ends with Streamlit        | -                     |
+| 5    | 3/24  | Development Time                                 | -  |
+| 6    | 3/31  | Building front-ends with Streamlit        | Group Checkpoint Due |
 | 7    | 4/7   | Development Time                                 | -                     |
 | 8    | 4/14  | Final Expo Prep                                  | Final Deliverable Due |
 | -    | -     | Final Project Exposition (4/15)                  | -                     |
