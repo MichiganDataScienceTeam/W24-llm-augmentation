@@ -4,3 +4,4 @@ __pycache__/
 venv/
 storage
 .DS_Store
+vectorstore
