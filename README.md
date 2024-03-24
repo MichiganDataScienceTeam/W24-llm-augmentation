@@ -19,7 +19,7 @@ To get started, simply clone the repository and use the notebooks in your local 
 | 6    | 3/31  | Building front-ends with Streamlit        | Group Checkpoint Due |
 | 7    | 4/7   | Development Time                                 | -                     |
 | 8    | 4/14  | Final Expo Prep                                  | Final Deliverable Due |
-| -    | -     | Final Project Exposition (4/15)                  | -                     |
+| -    | -     | Final Project Exposition (4/19)                  | Presentation Due                     |
 
 ## API Keys
 API keys are an essential part of the project. Everyone will be provided OpenAI API keys, and other keys may be available upon request if necessary for deliverables.
